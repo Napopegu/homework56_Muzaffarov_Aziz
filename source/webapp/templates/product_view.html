@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
-{% block title %}Products{% endblock %}
 
+{% block title %}{{ product.title }}{% endblock %}
 {% block content %}
-    <div class="row row-cold-2">
-
-        {% for product in products %}
-            <div class="col">
-                <div class="card mb-3">
+	<div class="card mb-3">
                     <div class="row g-0">
                         <div class="col-md-4">
                             <img src="{{ product.image }}" class="img-fluid rounded-start" alt="...">
@@ -14,20 +10,15 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ product.title }}</h5>
-
                                 <p class="card-text"><small
-                                        class="text-body-secondary">{{ product.category.title }}</small>
-                                </p>
+                                        class="text-body-secondary">{{ product.category.title }}</small></p>
                                 <p class="card-text">Price: {{ product.price }}$</p>
-                                <a href="{% url 'product_view' product.pk %}" class="card-link">see more>>> </a>
+                                <p class="card-text">{{ product.description }}</p>
+                                <p class="card-text"><small
+                                        class="text-body-secondary">Added: {{ product.create_at|date:"d/m/Y %H:i" }}</small></p>
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-
-
-    </div>
-
 {% endblock %}
