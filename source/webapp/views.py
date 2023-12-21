@@ -8,6 +8,12 @@ def products_view(request):
     return render(request, template_name='products_list.html', context={'products': products})
 
 
+def products_definitely_category_view(request, category_title):
+    products = Product.objects.exclude(qty=0).filter(category__title=category_title).order_by('category__title',
+                                                                                              'title')
+    return render(request, template_name='products_list.html', context={'products': products})
+
+
 def product_view(request, pk):
     product = get_object_or_404(Product, pk=pk)
     return render(request, template_name='product_view.html', context={'product': product})
